@@ -1,0 +1,72 @@
+@import "../../helper/variables.scss";
+.header {
+  background-image: url(../../images/header.svg);
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .logo {
+    padding-top: 24px;
+    font-size: 40px;
+    color: $colorWhite;
+  }
+
+  .discription {
+    padding-top: 48px;
+  }
+
+  .title {
+    font-size: 48px;
+    margin-bottom: 24px;
+    color: $colorWhite;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    color: $colorWhite;
+    margin-bottom: 32px;
+  }
+
+  .link {
+    padding: 17px 35px;
+    background-color: $colorWhite;
+    color: $colorLink;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .img {
+    margin-bottom: 38px;
+  }
+}
+
+.about {
+  text-align: center;
+  .title {
+    font-size: 32px;
+    margin-bottom: 24px;
+    color: $colorBlack;
+    display: inline-block;
+    max-width: 470px;
+    margin: auto;
+  }
+  .subtitle {
+    font-size: 20px;
+    display: inline-block;
+    max-width: 780px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    padding: 48px 0;
+    text-align: center;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
+    color: $colorWhite;
+    border-radius: 32px;
+    max-width: 380px;
+
+    &:nth-of-type(2) {
+      //   margin: 0 20px;
+    }
+  }
+}
