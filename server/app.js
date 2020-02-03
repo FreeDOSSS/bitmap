@@ -11,4 +11,10 @@ const app = express();
 app.use(cors("*"));
 app.use(logger("dev"));
 
+app.get("/users", (req, res) => {
+  USERS.find()
+    .limit(16)
+    .exec((err, user) => res.status(200).json(user));
+});
+
 app.listen(port, () => console.log("Сервер запущен, порт: ", port));

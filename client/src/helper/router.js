@@ -1,4 +1,5 @@
 import Home from "../page/Home";
+import Users from "../page/Users";
 
 const router = {
   home: {
@@ -8,6 +9,10 @@ const router = {
   stats: {
     path: "/statistic"
     // component: Statistic
+  },
+  users: {
+    path: "/users",
+    component: Users
   }
 };
 export default router;
