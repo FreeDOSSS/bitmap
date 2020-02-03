@@ -1,0 +1,12 @@
+@import "../../helper/variables.scss";
+
+.pagination {
+  // display: block;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  list-style: none;
+  > li {
+    margin: 0 10px;
+  }
+}

@@ -3,7 +3,7 @@ import * as styles from "./Subscribe.module.scss";
 const Subsribe = () => {
   const hendlerForm = evt => {
     evt.preventDefault();
-    const { target } = evt;
+    // const { target } = evt;
   };
 
   return (

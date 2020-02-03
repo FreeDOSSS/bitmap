@@ -11,10 +11,14 @@ const app = express();
 app.use(cors("*"));
 app.use(logger("dev"));
 
+// console.log("TCL: USERS.count()", USERS.count());
 app.get("/users", (req, res) => {
+  const limit = 0;
   USERS.find()
-    .limit(16)
-    .exec((err, user) => res.status(200).json(user));
+    .limit(limit)
+    .exec((err, user) => {
+      res.status(200).json(user);
+    });
 });
 
 app.listen(port, () => console.log("Сервер запущен, порт: ", port));
