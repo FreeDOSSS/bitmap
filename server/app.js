@@ -25,37 +25,55 @@ function selectItems(base, page, limit) {
   }
   return arrItems;
 }
-
+selectUsersStats(2, "2019-10-09", "2019-10-12");
 function selectUsersStats(id, datain, dataout) {
-  return statistic().filter(
+  // console.log(id, datain, dataout);
+  const element = statistic().filter(
     el =>
       el.user_id === id &&
-      new Date(el.date) >= datain &&
-      new Date(el.date) <= dataout
+      new Date(el.date) >= new Date(datain) &&
+      new Date(el.date) <= new Date(dataout)
   );
+  const temp = [];
+
+  Daterange(datain, dataout).forEach(el => {
+    if (
+      !element.some(
+        a =>
+          new Date(a.date).getDate() === el.getDate() &&
+          new Date(a.date).getMonth() === el.getMonth() &&
+          new Date(a.date).getFullYear() === el.getFullYear()
+      )
+    ) {
+      temp.push({
+        user_id: id,
+        date: `${el.getFullYear()}-${el.getMonth() + 1}-${el.getDate()}`,
+        page_views: 0,
+        clicks: 0
+      });
+    }
+  });
+  console.log(
+    [...element, ...temp].sort((a, b) => new Date(a.date) - new Date(b.date))
+  );
+  return [...element, ...temp];
 }
 
-const Daterange = (datain, dataout) => {
+function Daterange(datain, dataout) {
   const data = new Date(datain);
   const arr = [data];
-
-  // arr.push(data);
-
-  for (let i = datain; i < dataout; i = new Date(i.setDate(i.getDate() + 1))) {
+  for (
+    let i = new Date(datain);
+    i < new Date(dataout);
+    i = new Date(i.setDate(i.getDate() + 1))
+  ) {
     arr.push(i);
-    // console.log(datain);
   }
   return arr;
-};
-
-console.log(
-  "TCL: Daterange -> Daterange",
-  Daterange(new Date("2019-10-02"), new Date("2019-10-10"))
-);
+}
 
 app.get("/users", (req, res) => {
   const { page, limit } = req.query;
-  console.log(page, limit);
   res.status(200).json({
     users: [...selectItems(users(), Number(page), Number(limit))],
     allPage: Math.ceil(users().length / Number(limit))
@@ -66,9 +84,14 @@ app.get("/users/:id", (req, res) => {
   const { id } = req.params;
   const { datain, dataout } = req.query;
 
+  // console.log(selectUsersStats(Number(id), datain, dataout).length);
   res
     .status(200)
-    .json(selectUsersStats(Number(id), new Date(datain), new Date(dataout)));
+    .json(
+      selectUsersStats(Number(id), datain, dataout).sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      )
+    );
 });
 
 app.listen(port, () => console.log("Сервер запущен, порт: ", port));
