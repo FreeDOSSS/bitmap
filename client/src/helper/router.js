@@ -1,5 +1,6 @@
 import Home from "../page/Home";
 import Users from "../page/Users";
+import Statictics from "../page/Statisctics";
 
 const router = {
   home: {
@@ -7,8 +8,8 @@ const router = {
     component: Home
   },
   stats: {
-    path: "/statistic"
-    // component: Statistic
+    path: "/users/:id",
+    component: Statictics
   },
   users: {
     path: "/users",

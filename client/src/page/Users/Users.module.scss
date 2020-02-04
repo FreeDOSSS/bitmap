@@ -5,3 +5,48 @@
   background-color: $colorLink;
   color: $colorWhite;
 }
+
+.webPath {
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+
+  > * {
+    margin-right: 10px;
+  }
+
+  .prevPage {
+    color: #cccccc;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .arrow {
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #cccccc;
+    border-right: 2px solid #cccccc;
+    transform: rotateZ(45deg);
+  }
+
+  .linkCurrent {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.title {
+  font-weight: 700;
+}
+
+.footer {
+  background-color: #1c3b55;
+}
+
+.tableStatisctic {
+  margin-bottom: 24px;
+}

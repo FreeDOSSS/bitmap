@@ -1,39 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import ReactPaginate from "react-paginate";
 import * as styles from "./TableUsers.module.scss";
 import axios from "axios";
 import constants from "../../helper/constants";
+import router from "../../helper/router";
+import lodash from "lodash";
+import { useHistory } from "react-router-dom";
+
+const TableRow = memo(({ el }) => {
+  const history = useHistory();
+  const handleRedirect = useCallback(() => {
+    history.push(`${router.users.path}/${el.id}`);
+  }, [el, history]);
+  return (
+    <tr onClick={handleRedirect}>
+      <td>{el.id}</td>
+      <td>{el.first_name}</td>
+      <td>{el.last_name}</td>
+      <td>{el.email}</td>
+      <td>{el.gender}</td>
+      <td>{el.ip_address}</td>
+      <td>{el.total_clicks}</td>
+      <td>{el.page_views}</td>
+    </tr>
+  );
+}, lodash.isEqual);
+
 const TableUsers = () => {
   const [allPageCount, setAllPageCount] = useState(0);
   const [pageCount, setPageCount] = useState(1);
   const [userList, setUserList] = useState(null);
 
-  const rowsStatistic = () => {
-    const rows = [];
-    if (!userList) return;
-    for (let i = (pageCount - 1) * 16; i <= (pageCount - 1) * 16 + 16; i += 1) {
-      //   userList[i]
-      console.log(userList[i]);
-      if (!userList[i]) break;
-      rows.push(userList[i]);
-    }
-    return rows;
-  };
-
-  const hendlerPageSelected = data => setPageCount(data.selected);
+  const hendlerPageSelected = data => setPageCount(data.selected + 1);
 
   useEffect(() => {
-    axios.get(constants.getUrl).then(({ data }) => {
-      console.log(data.length);
-      setAllPageCount(Math.ceil(data.length / 16));
-      setUserList(data);
-    });
-  }, []);
+    const limit = 20;
+    console.log(pageCount);
+    axios
+      .get(`${constants.getUrl}?page=${pageCount}&limit=${limit}`)
+      .then(({ data }) => {
+        setAllPageCount(data.allPage);
+        setUserList(data.users);
+      });
+  }, [pageCount]);
 
   return (
     <>
-      <table>
-        <thead>
+      <table className={styles.table}>
+        <thead className={styles.thead}>
           <tr>
             <th>id</th>
             <th>Fisrt name</th>
@@ -45,28 +59,28 @@ const TableUsers = () => {
             <th>Total pageviews</th>
           </tr>
         </thead>
-        <tbody>
-          {userList &&
-            rowsStatistic().map(el => (
-              <tr key={el.id}>
-                <td>{el.users_id}</td>
-              </tr>
-            ))}
+        <tbody className={styles.tbody}>
+          {userList && userList.map(el => <TableRow el={el} key={el.id} />)}
         </tbody>
       </table>
       <div>
         <ReactPaginate
-          previousLabel={"previous"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
+          previousLinkClassName={styles.prev}
+          nextLinkClassName={styles.next}
+          breakLabel={""}
+          previousLabel={""}
+          nextLabel={""}
+          disabledClassName={styles.disabled}
+          // nextClassName={styles.next}
+          // previousClassName={styles.prev}
           pageCount={allPageCount}
-          marginPagesDisplayed={1}
-          pageRangeDisplayed={3}
+          marginPagesDisplayed={0}
+          pageRangeDisplayed={5}
+          pageLinkClassName={styles.page}
           onPageChange={hendlerPageSelected}
           containerClassName={styles.pagination}
           // subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
+          activeClassName={styles.active}
         />
       </div>
     </>
