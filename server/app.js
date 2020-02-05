@@ -1,13 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-const logger = require("morgan");
+// const logger = require("morgan");
 
 const port = process.env.PORT || 3030;
 
 const { users, statistic } = require("./db/database");
 const app = express();
 app.use(cors("*"));
-app.use(logger("dev"));
+// app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,9 +25,7 @@ function selectItems(base, page, limit) {
   }
   return arrItems;
 }
-selectUsersStats(2, "2019-10-09", "2019-10-12");
 function selectUsersStats(id, datain, dataout) {
-  // console.log(id, datain, dataout);
   const element = statistic().filter(
     el =>
       el.user_id === id &&
@@ -36,7 +34,7 @@ function selectUsersStats(id, datain, dataout) {
   );
   const temp = [];
 
-  Daterange(datain, dataout).forEach(el => {
+  dataRange(datain, dataout).forEach(el => {
     if (
       !element.some(
         a =>
@@ -53,13 +51,11 @@ function selectUsersStats(id, datain, dataout) {
       });
     }
   });
-  console.log(
-    [...element, ...temp].sort((a, b) => new Date(a.date) - new Date(b.date))
-  );
+
   return [...element, ...temp];
 }
 
-function Daterange(datain, dataout) {
+function dataRange(datain, dataout) {
   const data = new Date(datain);
   const arr = [data];
   for (
@@ -83,15 +79,12 @@ app.get("/users", (req, res) => {
 app.get("/users/:id", (req, res) => {
   const { id } = req.params;
   const { datain, dataout } = req.query;
-
-  // console.log(selectUsersStats(Number(id), datain, dataout).length);
-  res
-    .status(200)
-    .json(
-      selectUsersStats(Number(id), datain, dataout).sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-      )
-    );
+  res.status(200).json({
+    user: users().find(el => el.id === Number(id)),
+    stats: selectUsersStats(Number(id), datain, dataout).sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    )
+  });
 });
 
 app.listen(port, () => console.log("Сервер запущен, порт: ", port));
