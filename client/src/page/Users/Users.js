@@ -7,12 +7,14 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 
 const Users = props => {
-  // const hendlerRow = id => {
-  //   props.history.push(`${router.users.path}/${id}`);
-  // };
   return (
     <>
-      <Container NameClass={styles.logo}>AppCo</Container>
+      <Container NameClass={styles.logo}>
+        <Link to={router.home.path} className={styles.link}>
+          {" "}
+          AppCo
+        </Link>
+      </Container>
 
       <Container>
         <div className={styles.webPath}>

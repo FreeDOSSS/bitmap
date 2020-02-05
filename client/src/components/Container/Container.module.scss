@@ -1,6 +1,7 @@
 @import "../../helper/variables.scss";
 
 .container {
-  width: $widthDS - 20px;
+  max-width: $widthDS - 20px;
   margin: auto;
+  padding: 0 5px;
 }

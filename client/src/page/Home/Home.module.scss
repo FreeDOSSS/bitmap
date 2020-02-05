@@ -13,6 +13,7 @@
 
   .discription {
     padding-top: 48px;
+    margin-bottom: 20px;
   }
 
   .title {
@@ -37,6 +38,14 @@
 
   .img {
     margin-bottom: 38px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    .title {
+      font-size: 34px;
+    }
   }
 }
 
@@ -89,25 +98,39 @@
   }
 }
 
+@media (max-width: 600px) {
+  .about .cardBox {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
 .start {
   // border-top: 40px solid $colorBody;
   // padding-top: 40px;
   background: linear-gradient(93.19deg, #255d8b 2.29%, #3a80ba 96.79%);
-  position: relative;
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: -40px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: url(../../images/macbook.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    // z-index: 20;
-    background-position-x: 70%;
-    background-position-y: bottom;
+  .box {
+    margin-left: 0;
+  }
+
+  .mac {
+    position: relative;
+    min-height: 200px;
+    &::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      // left: 50%;
+      background-image: url(../../images/macbook.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      // z-index: 20;
+      background-position-x: center;
+      background-position-y: bottom;
+    }
   }
 
   .discription {
@@ -138,7 +161,15 @@
     }
   }
 }
-
+@media (max-width: 600px) {
+  .start {
+    .discription {
+      .title {
+        font-size: 24px;
+      }
+    }
+  }
+}
 .price {
   // padding-top: 80px;
   text-align: center;
@@ -166,14 +197,14 @@
     text-align: center;
     font-size: 32px;
     display: inline-block;
-    width: 580px;
+    max-width: 580px;
     margin-bottom: 34px;
   }
 
   .subtitle {
     color: $colorSecondary;
     font-size: 20px;
-    width: 664px;
+    max-width: 664px;
     margin: auto;
     margin-bottom: 32px;
   }
@@ -263,9 +294,21 @@
 }
 
 .footer {
+  // padding-top: 24px;
   background-image: url(../../images/footer.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
   padding-top: 30px;
+}
+
+@media (max-width: 800px) {
+  .price .cardBox {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .footer {
+    background-size: cover;
+  }
 }

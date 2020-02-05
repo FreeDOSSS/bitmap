@@ -84,8 +84,8 @@ const Home = () => {
       <Container NameClass={styles.start}>
         <div
           className={clsx(
-            styles.mac,
-            "uk-grid uk-child-width-1-1 uk-child-width-1-2@s"
+            styles.box,
+            "uk-grid uk-child-width-1-1 uk-child-width-1-2@m"
           )}
         >
           <div className={styles.discription}>
@@ -103,7 +103,7 @@ const Home = () => {
               Lorm more
             </Link>
           </div>
-          <div className={styles}></div>
+          <div className={styles.mac}></div>
         </div>
       </Container>
       <Container NameClass={styles.priceWrp}>

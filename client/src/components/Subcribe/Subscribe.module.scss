@@ -1,6 +1,7 @@
 @import "../../helper/variables.scss";
 .form {
-  width: 580px;
+  max-width: 580px;
+  width: 100%;
   border: 1px solid #f1f1f1;
   background-color: $colorWhite;
   margin: auto;
@@ -34,12 +35,21 @@
 
 .field {
   flex-grow: 1;
-  height: 100;
+  // height: 100;
   border: none;
   padding-left: 20px;
   font-size: 16px;
 
   &:focus {
     outline: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .submit {
+    padding: 15px 24px;
+  }
+  .field {
+    width: 180px;
   }
 }

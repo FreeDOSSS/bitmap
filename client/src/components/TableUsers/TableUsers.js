@@ -46,23 +46,25 @@ const TableUsers = () => {
 
   return (
     <>
-      <table className={styles.table}>
-        <thead className={styles.thead}>
-          <tr>
-            <th>id</th>
-            <th>Fisrt name</th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>IP addres</th>
-            <th>Total clicks</th>
-            <th>Total pageviews</th>
-          </tr>
-        </thead>
-        <tbody className={styles.tbody}>
-          {userList && userList.map(el => <TableRow el={el} key={el.id} />)}
-        </tbody>
-      </table>
+      <div className={styles.tableWrp}>
+        <table className={styles.table}>
+          <thead className={styles.thead}>
+            <tr>
+              <th>id</th>
+              <th>Fisrt name</th>
+              <th>Last name</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>IP addres</th>
+              <th>Total clicks</th>
+              <th>Total pageviews</th>
+            </tr>
+          </thead>
+          <tbody className={styles.tbody}>
+            {userList && userList.map(el => <TableRow el={el} key={el.id} />)}
+          </tbody>
+        </table>
+      </div>
       <div>
         <ReactPaginate
           previousLinkClassName={styles.prev}

@@ -4,4 +4,60 @@
   padding: 13px 0;
   background-color: $colorLink;
   color: $colorWhite;
+
+  .link {
+    color: $colorWhite;
+  }
+}
+
+.webPath {
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 24px;
+
+  > * {
+    margin-right: 5px;
+  }
+
+  .prevPage {
+    color: #cccccc;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .arrow {
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #cccccc;
+    border-right: 2px solid #cccccc;
+    transform: rotateZ(45deg);
+  }
+
+  .linkCurrent {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.select {
+  display: flex;
+  > * {
+    // min-width: 150px;
+    margin-right: 10px;
+  }
+}
+
+.footer {
+  background-color: #1c3b55;
+}
+
+@media (max-width: 600px) {
+  .webPath {
+    font-size: 12px;
+  }
 }

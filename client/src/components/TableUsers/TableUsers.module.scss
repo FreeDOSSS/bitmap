@@ -8,6 +8,7 @@
   align-items: center;
   list-style: none;
   margin-bottom: 24px;
+  padding: 0;
   > li {
     margin: 0 10px;
   }
@@ -63,20 +64,39 @@
   }
 }
 
+@media (max-width: 600px) {
+  .pagination {
+    > li {
+      margin: 0 5px;
+    }
+
+    .page {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+.tableWrp {
+  max-width: 100%;
+  overflow-y: auto;
+  // overflow-x: visible;
+  margin-bottom: 24px;
+}
+
 .table {
   border-collapse: collapse;
   margin: auto;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 15px;
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .thead th {
   background-color: $colorLink;
   color: $colorWhite;
   font-weight: 400;
-  padding: 5px 24px;
+  padding: 5px 15px;
   border-right: 1px solid $colorWhite;
   &:first-of-type {
     border-top-left-radius: 8px;
@@ -89,7 +109,7 @@
 
 .tbody td {
   border-right: 1px solid $colorWhite;
-  padding: 6px 24px;
+  padding: 6px 16px;
   text-align: center;
 
   &:nth-of-type(2),
